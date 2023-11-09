@@ -25,6 +25,10 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         inputNama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -33,6 +37,49 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
         tombolRegistrasi = new javax.swing.JButton();
         tombolPinjamBuku = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        KembalikanBuku = new javax.swing.JButton();
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel2.setText("SELAMAT");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setText("Anda berhasil melakukan registrasi");
+
+        jButton1.setText("Kembali");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel6))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel2))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 400));
@@ -69,44 +116,52 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Peminjaman Buku Perpustakaan");
 
+        KembalikanBuku.setText("KEMBALIKAN BUKU");
+        KembalikanBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KembalikanBukuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(194, 194, 194))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputNama)
-                    .addComponent(inputNim, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-                .addGap(56, 56, 56))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
                         .addComponent(tombolRegistrasi)
-                        .addGap(73, 73, 73)
-                        .addComponent(tombolPinjamBuku))
+                        .addGap(70, 70, 70)
+                        .addComponent(tombolPinjamBuku)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(KembalikanBuku))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel1))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputNama)
+                            .addComponent(inputNim, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(inputNama, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -117,7 +172,8 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tombolRegistrasi)
-                    .addComponent(tombolPinjamBuku))
+                    .addComponent(tombolPinjamBuku)
+                    .addComponent(KembalikanBuku))
                 .addGap(37, 37, 37))
         );
 
@@ -135,6 +191,14 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
     private void tombolPinjamBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolPinjamBukuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tombolPinjamBukuActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void KembalikanBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembalikanBukuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KembalikanBukuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,12 +236,17 @@ public class HalamanAwal_1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton KembalikanBuku;
     private javax.swing.JTextField inputNama;
     private javax.swing.JTextField inputNim;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton tombolPinjamBuku;
     private javax.swing.JButton tombolRegistrasi;
     // End of variables declaration//GEN-END:variables
