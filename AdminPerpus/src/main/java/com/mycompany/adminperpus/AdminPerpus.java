@@ -11,6 +11,6 @@ package com.mycompany.adminperpus;
 public class AdminPerpus {
 
     public static void main(String[] args) {
-        System.out.println("Hello Everyone!");
+        System.out.println("Hello !");
     }
 }
