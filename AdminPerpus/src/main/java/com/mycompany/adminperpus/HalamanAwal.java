@@ -4,16 +4,17 @@
  */
 package com.mycompany.adminperpus;
 
+import java.sql.*;
 /**
  *
  * @author tbhan
  */
 public class HalamanAwal extends javax.swing.JFrame {
-
     /**
      * Creates new form HalamanAwal
      */
     public HalamanAwal() {
+       
         initComponents();
     }
 
