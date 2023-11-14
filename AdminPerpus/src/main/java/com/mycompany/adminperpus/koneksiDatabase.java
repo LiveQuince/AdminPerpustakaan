@@ -11,7 +11,7 @@ import java.sql.*;
  * @author User
  */
 public class koneksiDatabase {
-    String url= "jdbc:mysql://localhost:3306/perpustakaaan";
+    String url= "jdbc:mysql://localhost:3306/perpustakaaantercinta";
         String username = "root";
         String password = "";
  public void koneksi(){ 
