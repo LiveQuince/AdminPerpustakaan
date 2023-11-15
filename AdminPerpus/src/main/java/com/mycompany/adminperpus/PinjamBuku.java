@@ -123,7 +123,31 @@ public class PinjamBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void PinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinjamActionPerformed
-
+    String nama = jComboBox1.getSelectedItem().toString();
+    String url = "jdbc:mysql://localhost:3306/perpustakaantercinta";
+    String username = "root";
+    String password = ""; 
+    
+    try{
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql = "SELECT id FROM nama_tabel WHERE nama = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nama);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+                // Mengambil ID dari hasil query
+                int id = resultSet.getInt("id");
+                System.out.println("ID untuk " + nama + " adalah: " + id);
+            } else {
+                System.out.println("Data tidak ditemukan untuk " + nama);
+            }
+        resultSet.close();
+            statement.close();
+            connection.close();
+     }catch(Exception e){
+         
+     }
+        // TODO add your handling code here:   
     }//GEN-LAST:event_PinjamActionPerformed
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
