@@ -130,13 +130,13 @@ public class PinjamBuku extends javax.swing.JFrame {
     
     try{
         Connection connection = DriverManager.getConnection(url, username, password);
-        String sql = "SELECT id FROM nama_tabel WHERE nama = ?";
+        String sql = "SELECT id_anggota FROM anggota WHERE nama_anggota = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, nama);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
                 // Mengambil ID dari hasil query
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id_anggota");
                 System.out.println("ID untuk " + nama + " adalah: " + id);
             } else {
                 System.out.println("Data tidak ditemukan untuk " + nama);
