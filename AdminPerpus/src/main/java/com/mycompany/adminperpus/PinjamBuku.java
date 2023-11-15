@@ -52,7 +52,7 @@ public class PinjamBuku extends javax.swing.JFrame {
         });
 
         Keluar.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        Keluar.setText("KELUAR");
+        Keluar.setText("Kembali");
         Keluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 KeluarActionPerformed(evt);
@@ -105,7 +105,9 @@ public class PinjamBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_PinjamActionPerformed
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
-        // TODO add your handling code here:
+HalamanAwal awal = new HalamanAwal();
+awal.setVisible(true);
+this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_KeluarActionPerformed
 
     /**

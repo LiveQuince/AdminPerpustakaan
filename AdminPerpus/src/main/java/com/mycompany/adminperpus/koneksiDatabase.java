@@ -11,22 +11,29 @@ import java.sql.*;
  * @author User
  */
 public class koneksiDatabase {
-    String url= "jdbc:mysql://localhost:3306/perpustakaaantercinta";
+     private static koneksiDatabase instance;
+    private Connection koneksi;
+   
+    private koneksiDatabase(){
+        String url= "jdbc:mysql://localhost:3306/perpustakaantercinta";
         String username = "root";
         String password = "";
- public void koneksi(){ 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection koneksi = DriverManager.getConnection(url, username, password);
-            Statement st = koneksi.createStatement();
-    
-            st.close();
-            koneksi.close();
-                System.out.println("Koneksi Ditutup...");
-   
-        }
-        catch (ClassNotFoundException | SQLException ex){
+            this.koneksi = DriverManager.getConnection(url, username, password);
+        }catch (ClassNotFoundException | SQLException ex){
             System.out.println(ex.getMessage());
          }
-     }
+    }
+    
+    public static koneksiDatabase getInstance(){
+        if(instance == null){
+            instance = new koneksiDatabase();
+        }
+        return instance;
+    }
+    
+    public Connection getConnection(){
+        return koneksi;
+    }
 }
