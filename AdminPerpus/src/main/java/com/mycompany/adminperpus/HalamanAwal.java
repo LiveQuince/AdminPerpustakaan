@@ -159,16 +159,14 @@ public class HalamanAwal extends javax.swing.JFrame {
     }//GEN-LAST:event_inputNamaActionPerformed
 
     private void tombolRegistrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolRegistrasiActionPerformed
-nama = inputNama.getText();
+    nama = inputNama.getText();
     nim = inputNim.getText();
    
     
     try{
         stat = koneksi.getConnection().createStatement();
-         int sql = stat.executeUpdate("INSERT into anggota(kode_anggotaa, nama_anggota)");
-         if (sql == 1){
-             JOptionPane.showMessageDialog(rootPane, "Data Tersimpan");
-         }
+        String query1 = String.format("INSERT into anggota(kode_anggota, nama_anggota)values(\"%s\", \"%s\")", this.nim, this.nama);
+        this.stat.executeUpdate(query1);
          
     }catch(SQLException e){
         System.out.println("Gagal menyimpan" + e.getMessage());
