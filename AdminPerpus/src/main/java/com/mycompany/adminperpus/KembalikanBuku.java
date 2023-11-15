@@ -8,8 +8,7 @@ import java.sql.*;
  *
  * @author User
  */
-public class KembalikanBuku extends javax.swing.JFrame {
-
+public class KembalikanBuku extends javax.swing.JFrame {  
     /**
      * Creates new form KembalikanBuku
      */

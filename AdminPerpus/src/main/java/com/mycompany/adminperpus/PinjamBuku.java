@@ -8,7 +8,7 @@ import java.sql.*;
  *
  * @author User
  */
-public class PinjamBuku extends javax.swing.JFrame {
+public class PinjamBuku extends javax.swing.JFrame { 
     /**
      * Creates new form PinjamBuku
      */
@@ -123,42 +123,42 @@ public class PinjamBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void PinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinjamActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_PinjamActionPerformed
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
-HalamanAwal awal = new HalamanAwal();
-awal.setVisible(true);
-this.dispose();         // TODO add your handling code here:
+    HalamanAwal awal = new HalamanAwal();
+    awal.setVisible(true);
+    this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_KeluarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("select nama_anggota from anggota");
-            while(rs.next()){
-                String nama = rs.getString("nama_anggota");
-                jComboBox1.addItem(nama);
-            }
-            con.close();
-        }catch(Exception e){
-            
+    try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select nama_anggota from anggota");
+        while(rs.next()){
+            String nama = rs.getString("nama_anggota");
+            jComboBox1.addItem(nama);
         }
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("select judul_buku from buku");
-            while(rs.next()){
-                String nama = rs.getString("judul_buku");
-                jComboBox2.addItem(nama);
-            }
-            con.close();
-        }catch(Exception e){
+        con.close();
+    }catch(Exception e){
 
+    }
+    try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery("select judul_buku from buku");
+        while(rs.next()){
+            String nama = rs.getString("judul_buku");
+            jComboBox2.addItem(nama);
         }
+        con.close();
+    }catch(Exception e){
+
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
