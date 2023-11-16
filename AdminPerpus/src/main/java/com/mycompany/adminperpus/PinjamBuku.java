@@ -132,64 +132,64 @@ public class PinjamBuku extends javax.swing.JFrame {
     String password = "";
     
     try{
-    Connection connection = DriverManager.getConnection(url, username, password);
-    String sql1 = "SELECT id_anggota FROM anggota WHERE nama_anggota = ?";
-    PreparedStatement statement1 = connection.prepareStatement(sql1);
-    statement1.setString(1, nama);
-    ResultSet resultSet1 = statement1.executeQuery();
-    int idAnggota = 0;
-    if (resultSet1.next()) {
-            // Mengambil ID dari hasil query
-            idAnggota = resultSet1.getInt("id_anggota");
-            System.out.println("ID untuk " + nama + " adalah: " + idAnggota);
-        } else {
-            System.out.println("Data tidak ditemukan untuk " + nama);
-        }
-    
-    String sql2 = "SELECT id_buku FROM buku WHERE judul_buku = ?";
-    PreparedStatement statement2 = connection.prepareStatement(sql2);
-    statement2.setString(1, buku);
-    ResultSet resultSet2 = statement2.executeQuery();
-    int idBuku = 0;
-    if (resultSet2.next()) {
-            // Mengambil ID dari hasil query
-            idBuku = resultSet2.getInt("id_buku");
-            System.out.println("ID untuk " + buku + " adalah: " + idBuku);
-        } else {
-            System.out.println("Data tidak ditemukan untuk " + buku);
-        }
-    
-    String checkExistingSql = "SELECT id_buku FROM peminjaman WHERE id_buku = ?";
-    PreparedStatement checkExistingStatement = connection.prepareStatement(checkExistingSql);
-    checkExistingStatement.setInt(1, idBuku);
-    ResultSet existingResultSet = checkExistingStatement.executeQuery();
-    if (existingResultSet.next()) {
-        System.out.println("Peminjaman untuk buku dengan ID " + idBuku + " sudah ada.");
-    }else{
-    
-    String sqlInsert = "INSERT INTO peminjaman (id_anggota, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?)";
-    PreparedStatement statementInsert = connection.prepareStatement(sqlInsert);
-    statementInsert.setInt(1, idAnggota);
-    statementInsert.setInt(2, idBuku);
-    Date currentDate = Date.valueOf(LocalDate.now());
-    statementInsert.setDate(3, currentDate);
-    LocalDate returnDate = LocalDate.now().plusDays(3);
-    Date returnDateSQL = Date.valueOf(returnDate);
-    statementInsert.setDate(4, returnDateSQL);
-    int rowsInserted = statementInsert.executeUpdate();
+        Connection connection = DriverManager.getConnection(url, username, password);
+        String sql1 = "SELECT id_anggota FROM anggota WHERE nama_anggota = ?";
+        PreparedStatement statement1 = connection.prepareStatement(sql1);
+        statement1.setString(1, nama);
+        ResultSet resultSet1 = statement1.executeQuery();
+        int idAnggota = 0;
+        if (resultSet1.next()) {
+                // Mengambil ID dari hasil query
+                idAnggota = resultSet1.getInt("id_anggota");
+                System.out.println("ID untuk " + nama + " adalah: " + idAnggota);
+            } else {
+                System.out.println("Data tidak ditemukan untuk " + nama);
+            }
 
-    if (rowsInserted > 0) {
-        System.out.println("Data berhasil dimasukkan ke dalam tabel peminjaman");
-        JOptionPane.showMessageDialog(rootPane, "BUKU BERHASIL DIPINJAM");
-    } else {
-        System.out.println("Gagal memasukkan data ke dalam tabel peminjaman");
-    }
-    }           
-    resultSet1.close();
-    statement1.close();
-    resultSet2.close();
-    statement2.close();
-    connection.close();
+        String sql2 = "SELECT id_buku FROM buku WHERE judul_buku = ?";
+        PreparedStatement statement2 = connection.prepareStatement(sql2);
+        statement2.setString(1, buku);
+        ResultSet resultSet2 = statement2.executeQuery();
+        int idBuku = 0;
+        if (resultSet2.next()) {
+                // Mengambil ID dari hasil query
+                idBuku = resultSet2.getInt("id_buku");
+                System.out.println("ID untuk " + buku + " adalah: " + idBuku);
+            } else {
+                System.out.println("Data tidak ditemukan untuk " + buku);
+            }
+
+        String checkExistingSql = "SELECT id_buku FROM peminjaman WHERE id_buku = ?";
+        PreparedStatement checkExistingStatement = connection.prepareStatement(checkExistingSql);
+        checkExistingStatement.setInt(1, idBuku);
+        ResultSet existingResultSet = checkExistingStatement.executeQuery();
+        if (existingResultSet.next()) {
+            System.out.println("Peminjaman untuk buku dengan ID " + idBuku + " sudah ada.");
+        }else{
+
+        String sqlInsert = "INSERT INTO peminjaman (id_anggota, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?)";
+        PreparedStatement statementInsert = connection.prepareStatement(sqlInsert);
+        statementInsert.setInt(1, idAnggota);
+        statementInsert.setInt(2, idBuku);
+        Date currentDate = Date.valueOf(LocalDate.now());
+        statementInsert.setDate(3, currentDate);
+        LocalDate returnDate = LocalDate.now().plusDays(3);
+        Date returnDateSQL = Date.valueOf(returnDate);
+        statementInsert.setDate(4, returnDateSQL);
+        int rowsInserted = statementInsert.executeUpdate();
+
+        if (rowsInserted > 0) {
+            System.out.println("Data berhasil dimasukkan ke dalam tabel peminjaman");
+            JOptionPane.showMessageDialog(rootPane, "BUKU BERHASIL DIPINJAM");
+        } else {
+            System.out.println("Gagal memasukkan data ke dalam tabel peminjaman");
+        }
+        }           
+        resultSet1.close();
+        statement1.close();
+        resultSet2.close();
+        statement2.close();
+        connection.close();
     }catch(Exception e){
         e.printStackTrace();
     }

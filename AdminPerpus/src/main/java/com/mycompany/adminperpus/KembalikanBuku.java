@@ -28,9 +28,10 @@ public class KembalikanBuku extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Kembalikan = new javax.swing.JButton();
         Keluar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +54,11 @@ public class KembalikanBuku extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jButton1.setText("Munculkan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton2.setText("Munculkan");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -70,6 +71,14 @@ public class KembalikanBuku extends javax.swing.JFrame {
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jButton1.setText("Munculkan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -96,6 +105,9 @@ public class KembalikanBuku extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(124, 124, 124)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
                         .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -108,12 +120,14 @@ public class KembalikanBuku extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Kembalikan)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Keluar)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButton2)
                 .addGap(28, 28, 28))
         );
 
@@ -130,6 +144,63 @@ public class KembalikanBuku extends javax.swing.JFrame {
     this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_KeluarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String selectedNamaAnggota = jComboBox2.getSelectedItem().toString();
+        jComboBox3.removeAllItems();
+        try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false", "root", "");
+
+        String getIdAnggotaSql = "SELECT id_anggota FROM anggota WHERE nama_anggota = ?";
+        PreparedStatement getIdAnggotaStatement = con.prepareStatement(getIdAnggotaSql);
+        getIdAnggotaStatement.setString(1, selectedNamaAnggota);
+        ResultSet idAnggotaResultSet = getIdAnggotaStatement.executeQuery();
+
+        if (idAnggotaResultSet.next()) {
+            int idAnggota = idAnggotaResultSet.getInt("id_anggota");
+
+            String selectIdBukuSql = "SELECT id_buku FROM peminjaman WHERE id_anggota = ?";
+            PreparedStatement selectIdBukuStatement = con.prepareStatement(selectIdBukuSql);
+            selectIdBukuStatement.setInt(1, idAnggota);
+            ResultSet idBukuResultSet = selectIdBukuStatement.executeQuery();
+
+            while (idBukuResultSet.next()) {
+                int idBuku = idBukuResultSet.getInt("id_buku");
+
+                // Select judul_buku from buku based on the id_buku from peminjaman
+                String selectJudulBukuSql = "SELECT judul_buku FROM buku WHERE id_buku = ?";
+                PreparedStatement selectJudulBukuStatement = con.prepareStatement(selectJudulBukuSql);
+                selectJudulBukuStatement.setInt(1, idBuku);
+                ResultSet judulBukuResultSet = selectJudulBukuStatement.executeQuery();
+
+                while (judulBukuResultSet.next()) {
+                    String judulBuku = judulBukuResultSet.getString("judul_buku");
+                    jComboBox3.addItem(judulBuku);
+                }
+
+                selectJudulBukuStatement.close();
+            }
+
+            idBukuResultSet.close();
+            selectIdBukuStatement.close();
+        }
+
+        idAnggotaResultSet.close();
+        getIdAnggotaStatement.close();
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace(); // Handle exceptions properly in your production code
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -144,28 +215,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
     }catch(Exception e){
 
     }
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("select judul_buku from buku");
-        while(rs.next()){
-            String nama = rs.getString("judul_buku");
-            jComboBox3.addItem(nama);
-        }
-        con.close();
-    }catch(Exception e){
-
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,6 +256,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
     private javax.swing.JButton Keluar;
     private javax.swing.JButton Kembalikan;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
