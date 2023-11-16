@@ -132,7 +132,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("select nama_anggota from anggota");
@@ -145,7 +145,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
 
     }
     try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("select judul_buku from buku");

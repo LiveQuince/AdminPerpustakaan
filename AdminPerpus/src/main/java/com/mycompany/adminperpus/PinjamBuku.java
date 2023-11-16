@@ -124,9 +124,10 @@ public class PinjamBuku extends javax.swing.JFrame {
 
     private void PinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PinjamActionPerformed
     String nama = jComboBox1.getSelectedItem().toString();
+    String buku = jComboBox2.getSelectedItem().toString();
     String url = "jdbc:mysql://localhost:3306/perpustakaantercinta";
     String username = "root";
-    String password = ""; 
+    String password = "";
     
     try{
         Connection connection = DriverManager.getConnection(url, username, password);
@@ -142,12 +143,11 @@ public class PinjamBuku extends javax.swing.JFrame {
                 System.out.println("Data tidak ditemukan untuk " + nama);
             }
         resultSet.close();
-            statement.close();
-            connection.close();
-     }catch(Exception e){
+        statement.close();
+        connection.close();
+    }catch(Exception e){
          
-     }
-        // TODO add your handling code here:   
+    }
     }//GEN-LAST:event_PinjamActionPerformed
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
@@ -158,7 +158,7 @@ public class PinjamBuku extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("select nama_anggota from anggota");
@@ -171,7 +171,7 @@ public class PinjamBuku extends javax.swing.JFrame {
 
     }
     try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false","root","");
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery("select judul_buku from buku");
