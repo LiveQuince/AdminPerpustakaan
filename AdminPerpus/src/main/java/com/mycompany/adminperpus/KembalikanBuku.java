@@ -4,6 +4,9 @@
  */
 package com.mycompany.adminperpus;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 /**
  *
  * @author User
@@ -135,13 +138,76 @@ public class KembalikanBuku extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void KembalikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembalikanActionPerformed
-        // TODO add your handling code here:
+        try {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false", "root", "");
+
+    // Get the selected book title from jComboBox3
+    String selectedJudulBuku = jComboBox3.getSelectedItem().toString();
+
+    // Retrieve "id_buku" for the selected book title
+    String selectIdBukuSql = "SELECT id_buku FROM buku WHERE judul_buku = ?";
+    PreparedStatement selectIdBukuStatement = con.prepareStatement(selectIdBukuSql);
+    selectIdBukuStatement.setString(1, selectedJudulBuku);
+    ResultSet idBukuResultSet = selectIdBukuStatement.executeQuery();
+
+    if (idBukuResultSet.next()) {
+        // Get "id_buku" from the result set
+        int selectedIdBuku = idBukuResultSet.getInt("id_buku");
+
+        // Retrieve "tanggal_kembali" from peminjaman for the selected book
+        String selectTanggalKembaliSql = "SELECT tanggal_kembali FROM peminjaman WHERE id_buku = ?";
+        PreparedStatement selectTanggalKembaliStatement = con.prepareStatement(selectTanggalKembaliSql);
+        selectTanggalKembaliStatement.setInt(1, selectedIdBuku);
+        ResultSet tanggalKembaliResultSet = selectTanggalKembaliStatement.executeQuery();
+
+        if (tanggalKembaliResultSet.next()) {
+            // Get "tanggal_kembali" from the result set
+            LocalDate tanggalKembali = tanggalKembaliResultSet.getDate("tanggal_kembali").toLocalDate();
+
+            // Get the current date
+            LocalDate currentDate = LocalDate.now();
+
+            // Calculate the difference in days
+            long daysDifference = tanggalKembali.until(currentDate).getDays();
+
+            // Calculate the fine (assuming 3000 dollars per day)
+            long fineAmount = daysDifference * 3000;
+
+            // Show a dialog with the fine amount if it's greater than 0
+            if (fineAmount > 0) {
+                String message = "Denda yang harus dibayar adalah: Rp." + fineAmount;
+                JOptionPane.showMessageDialog(this, message, "Denda Telat", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Show a dialog if no fine is applicable
+                JOptionPane.showMessageDialog(this, "Tidak ada denda", "Denda Telat", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            // Handle the case where "tanggal_kembali" is not found
+            JOptionPane.showMessageDialog(this, "Tanggal Kembali not found", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        // Close resources
+        tanggalKembaliResultSet.close();
+        selectTanggalKembaliStatement.close();
+    } else {
+        // Handle the case where "id_buku" is not found
+        JOptionPane.showMessageDialog(this, "ID Buku not found", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    idBukuResultSet.close();
+    selectIdBukuStatement.close();
+    con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_KembalikanActionPerformed
 
     private void KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeluarActionPerformed
     HalamanAwal awal = new HalamanAwal();
     awal.setVisible(true);
-    this.dispose();        // TODO add your handling code here:
+    this.dispose();
     }//GEN-LAST:event_KeluarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -150,7 +216,6 @@ public class KembalikanBuku extends javax.swing.JFrame {
         try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/perpustakaantercinta?useSSL=false", "root", "");
-
         String getIdAnggotaSql = "SELECT id_anggota FROM anggota WHERE nama_anggota = ?";
         PreparedStatement getIdAnggotaStatement = con.prepareStatement(getIdAnggotaSql);
         getIdAnggotaStatement.setString(1, selectedNamaAnggota);
@@ -189,7 +254,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
         getIdAnggotaStatement.close();
         con.close();
     } catch (Exception e) {
-        e.printStackTrace(); // Handle exceptions properly in your production code
+        e.printStackTrace();
     }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -213,7 +278,7 @@ public class KembalikanBuku extends javax.swing.JFrame {
         }
         con.close();
     }catch(Exception e){
-
+        e.printStackTrace();
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 

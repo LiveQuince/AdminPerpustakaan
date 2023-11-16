@@ -213,7 +213,7 @@ public class PinjamBuku extends javax.swing.JFrame {
         }
         con.close();
     }catch(Exception e){
-
+        e.printStackTrace();
     }
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -226,7 +226,7 @@ public class PinjamBuku extends javax.swing.JFrame {
         }
         con.close();
     }catch(Exception e){
-
+        e.printStackTrace();
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
