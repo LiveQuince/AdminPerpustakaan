@@ -187,9 +187,19 @@ public class KembalikanBuku extends javax.swing.JFrame {
             if (fineAmount > 0) {
                 String message = "Denda yang harus dibayar adalah: Rp." + fineAmount;
                 JOptionPane.showMessageDialog(this, message, "Denda Telat", JOptionPane.INFORMATION_MESSAGE);
+                String deletePeminjamanSql = "DELETE FROM peminjaman WHERE id_buku = ?";
+                PreparedStatement deletePeminjamanStatement = con.prepareStatement(deletePeminjamanSql);
+                deletePeminjamanStatement.setInt(1, selectedIdBuku);
+                deletePeminjamanStatement.executeUpdate();
+                deletePeminjamanStatement.close();
             } else {
                 // Show a dialog if no fine is applicable
                 JOptionPane.showMessageDialog(this, "Tidak ada denda", "Denda Telat", JOptionPane.INFORMATION_MESSAGE);
+                String deletePeminjamanSql = "DELETE FROM peminjaman WHERE id_buku = ?";
+                PreparedStatement deletePeminjamanStatement = con.prepareStatement(deletePeminjamanSql);
+                deletePeminjamanStatement.setInt(1, selectedIdBuku);
+                deletePeminjamanStatement.executeUpdate();
+                deletePeminjamanStatement.close();
             }
         } else {
             // Handle the case where "tanggal_kembali" is not found
